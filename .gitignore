@@ -9,5 +9,10 @@ wheels/
 # Virtual environments
 .venv
 
+.env*
+!.env.example
+
 .ruff_cache
 .pytest_cache
+.coverage
+htmlcov

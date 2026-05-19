@@ -1,7 +1,9 @@
+import pytest
+
 from main import main
 
 
-def test_main(capsys):
+def test_main(caplog: pytest.LogCaptureFixture):
     main()
-    captured = capsys.readouterr()
-    assert "Hello from hello-jma-xml-py!" in captured.out
+
+    assert "Hello from hello-jma-xml-py!" in caplog.text

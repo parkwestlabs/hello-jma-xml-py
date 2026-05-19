@@ -10,9 +10,38 @@ dependencies = []
 dev = [
     "pyright>=1.1.409",
     "pytest>=9.0.3",
+    "pytest-cov>=7.1.0",
     "ruff>=0.15.13",
+]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D",        # Missing docstring
+    "TC",       # type-checking block
+    "COM812",   # fix conflicts with formatter
+    "INP001",   # an implicit namespace package
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*" = [
+    "S101",     # Use of assert
+    "ANN201",   # Missing return type annotation for public function
 ]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 testpaths = ["tests"]
+addopts = "--cov=src --cov-branch --cov-report=term-missing --cov-report=html"
+
+# デバッグ用に log 出力を表示させるかどうかの設定
+log_cli = false
+log_cli_level = "INFO"
+
+[tool.coverage.run]
+omit = ["tests/**/*"]
+
+[tool.coverage.report]
+exclude_also = [
+    "if __name__ == .__main__.:",
+]
